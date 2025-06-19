@@ -1,4 +1,4 @@
 (cl:in-package #:common-lisp-user)
 
-(defpackage #:trivial-loop-extensions
+(defpackage #:loop-iteration-paths
   (:use #:common-lisp))

@@ -1,4 +1,4 @@
-(cl:in-package #:trivial-loop-extensions)
+(cl:in-package #:loop-iteration-paths)
 
 (defmacro with-stream-close ((var closep) &body body)
   `(unwind-protect
