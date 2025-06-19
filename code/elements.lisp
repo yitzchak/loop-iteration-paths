@@ -91,7 +91,7 @@
                           (= ,it-var ,limit-var)
                           ()
                           ()
-                          (,variable (elt ,seq-ref ,index-var)
+                          (,variable (elt ,seq-ref ,it-var)
                            ,@(when index-var
                                `(,index-var ,it-var))
                            ,it-var (+ ,it-var ,step-var))))))

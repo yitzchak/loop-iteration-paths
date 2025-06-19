@@ -6,6 +6,8 @@
   (multiple-value-bind (var varp)
       #+abcl
       (loop::loop-named-var name)
+      #+ccl
+      (ansi-loop::named-variable name)
       #+(or clasp mkcl)
       (system::named-variable name)
       #+ecl
