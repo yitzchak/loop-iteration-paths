@@ -1,0 +1,36 @@
+name: test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.lisp }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        lisp:
+        - abcl
+        - ccl
+        - clasp
+        - ecl
+        - sbcl
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/yitzchak/archlinux-cl:latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    - name: Setup Lisp Environment
+      run: |
+        make-rc
+        asdf-add
+    - name: Run Regression Tests
+      run: |
+        lisp -i ${{ matrix.lisp }} -e "(ql:quickload :loop-iteration-paths/test)" -e "(asdf:test-system :loop-iteration-paths)"

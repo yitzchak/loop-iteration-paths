@@ -12,9 +12,12 @@
                 :serial t
                 :components ((:file "packages")
                              (:file "polyfill-ecl" :if-feature :ecl)
-                             (:file "compatibility")
-                             (:file "elements")
-                             (:file "stream")))))
+                             (:file "compatibility"
+                              :if-feature (:or :abcl :ccl :clasp :cmucl :ecl :sbcl))
+                             (:file "elements"
+                              :if-feature (:or :abcl :ccl :clasp :cmucl :ecl :sbcl))
+                             (:file "stream"
+                              :if-feature (:or :abcl :ccl :clasp :cmucl :ecl :sbcl))))))
 
 (asdf:defsystem "loop-iteration-paths/test"
   :description "Test system"
@@ -27,6 +30,7 @@
   :depends-on ("loop-iteration-paths"
                "nontrivial-gray-streams"
                "parachute")
+  :if-feature (:or :abcl :ccl :clasp :cmucl :ecl :sbcl)
   :perform (asdf:test-op (op c)
              (defparameter cl-user::*exit-on-test-failures* t)
              (uiop:symbol-call :parachute :test :loop-iteration-paths/test))

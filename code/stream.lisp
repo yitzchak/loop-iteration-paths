@@ -1,5 +1,11 @@
 (cl:in-package #:loop-iteration-paths)
 
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (pushnew :loop-iteration-path/bytes *features*)
+  (pushnew :loop-iteration-path/characters *features*)
+  (pushnew :loop-iteration-path/lines *features*)
+  (pushnew :loop-iteration-path/objects *features*))
+
 (defmacro with-stream-close ((var closep) &body body)
   `(unwind-protect
         (progn ,@body)
