@@ -2,7 +2,8 @@
 
 The orignal Technical Memo 169 "Loop Iteration Macro" which defined
 LOOP for Lisp Machine Lisp and Maclisp also specified an extension
-mechanism know as an "iteration path." The syntax of was essentially:
+mechanism know as an "iteration path." The syntax of which
+essentially:
 
 ```
 for-as-iteration-path ::= {FOR | AS} var [type-spec] BEING
@@ -41,8 +42,8 @@ Manual is that of the CDRS iteration path:
 ## Common Lisp LOOP
 
 The first LOOP for Common Lisp was converted from the Symbolics code
-by Glenn Burke and was known as LOOP 829. It included the iteration
-path extension mechanism and the "attachments" default
+(LOOP 829) by Glenn Burke as is known as MIT LOOP. It included the
+iteration path extension mechanism and the "attachments" default
 path. Eventually the default path mechanism and the token THEIR was
 removed.
 
@@ -50,7 +51,7 @@ Most modern Common Lisp implementations still have the iteration path
 extension mechanism, although it is often not exported from the LOOP
 package. The hash table and package symbol subclauses are the residual
 syntax of the original iteration path syntax. If the Lisp
-implementation supports iteration paths than hash table and symbol
+implementation supports iteration paths then hash table and symbol
 iteration is actually implemented via this mechanism.
 
 ABCL, CCL, CMUCL, Clasp, ECL and SBCL are implementations that still
