@@ -96,7 +96,7 @@ phrases:
 
 * The IN and OF prepositions are synonyms and specify the form that
   evaluates to the stream. If one of these prepositions is not
-  specified then *STANDARD-INPUT* is used.
+  specified then \*STANDARD-INPUT\* is used.
 * The CLOSE preposition specifies whether the stream should be closed
   when the LOOP is terminated. If it is non-NIL then the stream is
   closed via UNWIND-PROTECT when the loop terminates. It is optional
