@@ -2,7 +2,7 @@
 
 The orignal Technical Memo 169 "Loop Iteration Macro" which defined
 LOOP for Lisp Machine Lisp and Maclisp also specified an extension
-mechanism know as an "iteration path." The syntax of which
+mechanism know as an "iteration path." The syntax of which was
 essentially:
 
 ```
