@@ -2,7 +2,7 @@
 
 The orignal Technical Memo 169 "Loop Iteration Macro" which defined
 LOOP for Lisp Machine Lisp and Maclisp also specified an extension
-mechanism know as an "iteration path." The syntax of which was
+mechanism known as an "iteration path." The syntax of which was
 essentially:
 
 ```
@@ -20,14 +20,12 @@ path-name             ::= symbol
 ```
 
 It was also possible to omit the `path-name`. In this case the macro
-expansion of LOOP used a default iteration patch called `attachments`
+expansion of LOOP used a default iteration path called `attachments`
 which was also permitted to rewrite the for-as-iteration-path clause
 at expansion time.  Later, Lisp Machine Lisp used the path named
 `default-loop-path` instead of `attachments`.
 
-New iteration paths were created using `DEFINE-LOOP-PATH` with their
-own preposition and internal LOOP variables, which could be accessed
-via USING. Inclusive iteration paths are those in which the initial
+Inclusive iteration paths are those in which the initial
 value of `var` was `form` itself. An example given in the Lisp Machine
 Manual is that of the CDRS iteration path:
 
@@ -39,10 +37,14 @@ Manual is that of the CDRS iteration path:
 ; => ((a b c . d) (b c . d) (c . d) d)
 ```
 
+New iteration paths were created using `DEFINE-LOOP-PATH` with their
+own prepositions and internal LOOP variables, which could be accessed
+via USING.
+
 ## Common Lisp LOOP
 
 The first LOOP for Common Lisp was converted from the Symbolics code
-(LOOP 829) by Glenn Burke as is known as MIT LOOP. It included the
+(LOOP 829) by Glenn Burke and is known as MIT LOOP. It included the
 iteration path extension mechanism and the "attachments" default
 path. Eventually the default path mechanism and the token THEIR was
 removed.
@@ -58,15 +60,54 @@ ABCL, CCL, CMUCL, Clasp, ECL and SBCL are implementations that still
 have iteration paths. CLISP does not, as its LOOP implementation is
 not derived from MIT LOOP.
 
-## ELEMENTS Iteration Path
+## Sequence Iteration
+
+### ELEMENTS Iteration Path
+
+The ELEMENTS iteration path iterates over sequences. If the extensible
+sequence protocol is available it will use MAKE-SEQUENCE-ITERATOR from
+that protocol. Otherwise it will use ELT and iterate an index into the
+sequence.
 
 ```
 path-name        ::= {ELEMENT | ELEMENTS}
-preposition-name ::= {IN | OF}
+preposition-name ::= {IN | OF | START | END | FROM-END}
 using-name       ::= {INDEX}
 ```
 
-## BYTES Iteration Path
+* The IN and OF prepositions are synonyms and specify the form that
+  evaluates to the sequence. One of these prepositions is required.
+* The START preposition specifies the starting index of the
+  iteration. It is optional and if not specified it will default to 0.
+* The END preposition specifies the ending index of the iteration. It
+  is optional and if not specified it will default to the sequence
+  length.
+* The FROM-END preposition specifies the iteration direction. If it is
+  non-NIL then iteration will go from END to START. Otherwise
+  iteration will go from START to END. It is optional and if not
+  specified it will default to NIL.
+* The INDEX phrase in USING names a variable to store the current
+  iteration index. It is optional.
+
+## Stream Iteration
+
+All stream iteration paths have the following prepositions and USING
+phrases:
+
+* The IN and OF prepositions are synonyms and specify the form that
+  evaluates to the stream. If one of these prepositions is not
+  specified then *STANDARD-INPUT* is used.
+* The CLOSE preposition specifies whether the stream should be closed
+  when the LOOP is terminated. If it is non-NIL then the stream is
+  closed via UNWIND-PROTECT when the loop terminates. It is optional
+  and if not specified it will default to NIL
+* The STREAM phrase in USING names a variable to store the current
+  stream. It is optional.
+
+### BYTES Iteration Path
+
+The BYTES iteration path iterates over an input stream using
+READ-BYTE. It terminates on EOF.
 
 ```
 path-name        ::= {BYTE | BYTES}
@@ -76,6 +117,9 @@ using-name       ::= {STREAM}
 
 ## CHARACTERS Iteration Path
 
+The CHARACTERS iteration path iterates over an input stream using
+READ-CHAR. It terminates on EOF.
+
 ```
 path-name        ::= {CHARACTER | CHARATERS}
 preposition-name ::= {IN | OF | CLOSE}
@@ -84,13 +128,25 @@ using-name       ::= {STREAM}
 
 ## LINES Iteration Path
 
+The LINES iteration path iterates over an input stream using
+READ-LINE. It terminates on EOF.
+
 ```
 path-name        ::= {LINE | LINES}
 preposition-name ::= {IN | OF | CLOSE}
 using-name       ::= {STREAM | MISSING-NEWLINE-P}
 ```
 
+In addition to the standard stream prepositions and USING phrases it
+also has the MISSING-NEWLINE-P USING phrase. This phrase is optional
+and specifies the name of variable to store the second value returned
+from READ-LINE which is non-NIL if the line was not terminated by a
+newline.
+
 ## OBJECTS Iteration Path
+
+The OBJECTS iteration path iterates over an input stream using
+READ. It terminates on EOF.
 
 ```
 path-name        ::= {OBJECT | OBJECTS}
