@@ -3,7 +3,7 @@
   :license "MIT"
   :author ("Tarn W. Burton")
   :maintainer "Tarn W. Burton"
-  ;:version (:read-file-form "version.sexp")
+  :version (:read-file-form "version.sexp")
   :homepage "https://github.com/yitzchak/loop-iteration-paths"
   :bug-tracker "https://github.com/yitzchak/loop-iteration-paths/issues"
   :depends-on ((:feature (:and :loop/khazern
@@ -31,7 +31,7 @@
   :license "MIT"
   :author ("Tarn W. Burton")
   :maintainer "Tarn W. Burton"
-  ;:version (:read-file-form "version.sexp")
+  :version (:read-file-form "version.sexp")
   :homepage "https://github.com/yitzchak/loop-iteration-paths"
   :bug-tracker "https://github.com/yitzchak/loop-iteration-paths/issues"
   :depends-on ("loop-iteration-paths"
