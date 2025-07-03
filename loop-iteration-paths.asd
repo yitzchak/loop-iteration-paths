@@ -6,18 +6,25 @@
   ;:version (:read-file-form "version.sexp")
   :homepage "https://github.com/yitzchak/loop-iteration-paths"
   :bug-tracker "https://github.com/yitzchak/loop-iteration-paths/issues"
-  :depends-on ()
+  :depends-on ((:feature (:and :loop/khazern
+                               (:not :loop/khazern-extension))
+                "khazern-extension-intrinsic"))
   :in-order-to ((asdf:test-op (asdf:test-op "loop-iteration-paths/test")))
   :components ((:module code
                 :serial t
                 :components ((:file "packages")
-                             (:file "polyfill-ecl" :if-feature :ecl)
+                             (:file "polyfill-ecl"
+                              :if-feature (:and (:not :loop/khazern)
+                                                :ecl))
                              (:file "compatibility"
-                              :if-feature (:or :abcl :ccl :clasp :cmucl :ecl :sbcl))
+                              :if-feature (:and (:not :loop/khazern)
+                                                (:or :abcl :ccl :clasp :cmucl :ecl :sbcl)))
                              (:file "elements"
-                              :if-feature (:or :abcl :ccl :clasp :cmucl :ecl :sbcl))
+                              :if-feature (:and (:not :loop/khazern)
+                                                (:or :abcl :ccl :clasp :cmucl :ecl :sbcl)))
                              (:file "stream"
-                              :if-feature (:or :abcl :ccl :clasp :cmucl :ecl :sbcl))))))
+                              :if-feature (:and (:not :loop/khazern)
+                                                (:or :abcl :ccl :clasp :cmucl :ecl :sbcl)))))))
 
 (asdf:defsystem "loop-iteration-paths/test"
   :description "Test system"

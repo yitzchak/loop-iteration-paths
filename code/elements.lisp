@@ -1,8 +1,5 @@
 (cl:in-package #:loop-iteration-paths)
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (pushnew :loop-iteration-path/elements *features*))
-
 (defun loop-elements-iteration-path (variable data-type prep-phrases)
   #+(or abcl clasp sbcl)
   (loop with from-end-ref
@@ -104,3 +101,5 @@
                :preposition-groups '((:of :in) (:start) (:end) (:from-end))
                :inclusive-permitted nil)
  
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (pushnew :loop/iteration-path/elements *features*))

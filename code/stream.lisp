@@ -1,11 +1,5 @@
 (cl:in-package #:loop-iteration-paths)
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (pushnew :loop-iteration-path/bytes *features*)
-  (pushnew :loop-iteration-path/characters *features*)
-  (pushnew :loop-iteration-path/lines *features*)
-  (pushnew :loop-iteration-path/objects *features*))
-
 (defmacro with-stream-close ((var closep) &body body)
   `(unwind-protect
         (progn ,@body)
@@ -93,3 +87,9 @@
                :preposition-groups '((:of :in) (:close))
                :inclusive-permitted nil
                :user-data '(:which :objects))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (pushnew :loop/iteration-path/bytes *features*)
+  (pushnew :loop/iteration-path/characters *features*)
+  (pushnew :loop/iteration-path/lines *features*)
+  (pushnew :loop/iteration-path/objects *features*))

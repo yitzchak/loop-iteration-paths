@@ -12,7 +12,7 @@ for-as-iteration-path ::= {FOR | AS} var [type-spec] BEING
 path-exclusive        ::= {EACH | THE} path-name
 path-inclusive        ::= form AND {ITS | EACH | HIS | HER | THEIR}
                           path-name
-path-using            ::= USING ({using-name simple-var}+)
+path-using            ::= USING ({using-name var}+)
 path-preposition      ::= preposition-name form
 preposition-name      ::= name
 using-name            ::= simple-var
