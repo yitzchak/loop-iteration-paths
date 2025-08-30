@@ -1,6 +1,14 @@
 # loop-iteration-paths
 
-The orignal Technical Memo 169 "Loop Iteration Macro" which defined
+> **_NOTE:_** [Khazern][], a new implementation of LOOP, now has
+> "iteration paths" as described below. It can be used extrinsically,
+> i.e. as a supplement to the CL implementation's own LOOP and has
+> many more built-in iteration path extensions available. I created
+> loop-iteration-paths as way to research and document the existing
+> extension mechanisms of CL implementations. I have not yet decided
+> whether to publish loop-iteration-paths to Quicklisp or OCICL.
+
+The original Technical Memo 169 "Loop Iteration Macro" which defined
 LOOP for Lisp Machine Lisp and Maclisp also specified an extension
 mechanism known as an "iteration path." The syntax of which was
 essentially:
@@ -153,3 +161,5 @@ path-name        ::= {OBJECT | OBJECTS}
 preposition-name ::= {IN | OF | CLOSE}
 using-name       ::= {STREAM}
 ```
+
+[Khazern]: https://github.com/s-expressionists/Khazern/
